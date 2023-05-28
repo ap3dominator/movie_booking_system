@@ -15,8 +15,6 @@ import lombok.ToString;
 @Entity
 @Getter
 @Setter
-@EqualsAndHashCode(exclude = { "cinemas"}) // This,
-@ToString(exclude = { "cinemas"}) // and this
 public class City {
 
     @Id
@@ -36,8 +34,9 @@ public class City {
     @OneToMany(
                 mappedBy = "city",
                 cascade = CascadeType.ALL,
-                fetch = FetchType.LAZY)
+                fetch = FetchType.LAZY
+    )
     @JsonManagedReference
-    private List<Cinema> cinemas;
+    private Set<Cinema> cinemas;
 
 }

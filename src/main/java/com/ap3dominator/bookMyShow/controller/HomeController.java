@@ -85,6 +85,9 @@ public class HomeController {
 
     @GetMapping("/GetAllCinemas")
     public ResponseEntity<List<Cinema>> getAllCinemas() {
+        for(Cinema cinema : cinemaRepository.findAll()){
+            System.out.println(cinema.getCity().getCityId());
+        }
         return  ResponseEntity.ok().body(cinemaRepository.findAll());
     }
 

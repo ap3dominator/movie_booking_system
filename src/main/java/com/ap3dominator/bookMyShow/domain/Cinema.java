@@ -32,6 +32,6 @@ public class Cinema {
     private City city;
 
     @OneToMany(mappedBy = "cinema")
-    private List<CinemaHall> cinemaHalls;
+    private Set<CinemaHall> cinemaHalls;
 
 }
