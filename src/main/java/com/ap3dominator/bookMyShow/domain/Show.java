@@ -50,7 +50,12 @@ public class Show {
     @JsonManagedReference(value="show")
     private Set<Booking> allBookings;
 
-    @OneToMany(mappedBy = "show")
+    @OneToMany(
+            mappedBy = "show",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @JsonManagedReference(value = "show-showSeat")
     private Set<ShowSeat> allShowSeats;
 
 

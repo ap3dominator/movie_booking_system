@@ -37,7 +37,7 @@ public class CinemaSeat {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    @JsonManagedReference
+    @JsonManagedReference(value = "cinemaSeat-showSeat")
     private Set<ShowSeat> ShowSeats;
 
 }

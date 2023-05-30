@@ -25,16 +25,18 @@ public class ShowSeat {
     private Double price;
 
     @ManyToOne
-    @JsonBackReference
+    @JsonBackReference(value = "cinemaSeat-showSeat")
     @JoinColumn(name = "cinema_seat_id")
     private CinemaSeat cinemaSeat;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "show_id", nullable = false)
+    @ManyToOne
+    @JsonBackReference(value = "show-showSeat")
+    @JoinColumn(name = "show_id")
     private Show show;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "booking_id", nullable = false)
+    @ManyToOne
+    @JsonBackReference(value = "booking-showSeat")
+    @JoinColumn(name = "booking_id")
     private Booking booking;
 
 }

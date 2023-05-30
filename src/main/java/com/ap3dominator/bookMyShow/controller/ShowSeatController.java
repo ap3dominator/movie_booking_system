@@ -15,10 +15,11 @@ public class ShowSeatController {
     @Autowired
     public ShowSeatRepository showSeatRepository;
 
-    @PostMapping("/addShowSeat")
+    @PostMapping("/AddShowSeat")
     public ResponseEntity<?> AddShowSeat(@RequestBody ShowSeat showSeat)
     {
         ShowSeat addedShowSeat = showSeatRepository.save(showSeat);
         return ResponseEntity.ok(addedShowSeat);
     }
+
 }
