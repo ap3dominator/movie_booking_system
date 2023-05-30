@@ -2,6 +2,7 @@ package com.ap3dominator.bookMyShow.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
@@ -40,7 +41,18 @@ public class Show {
     @JoinColumn(name = "cinema_hall_id")
     private CinemaHall cinemaHall;
 
+
+    @OneToMany(
+            mappedBy = "show",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @JsonManagedReference(value="show")
+    private Set<Booking> allBookings;
+
     @OneToMany(mappedBy = "show")
     private Set<ShowSeat> allShowSeats;
+
+
 
 }

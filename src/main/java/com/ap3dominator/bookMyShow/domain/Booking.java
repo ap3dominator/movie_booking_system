@@ -1,9 +1,9 @@
 package com.ap3dominator.bookMyShow.domain;
 
 import com.ap3dominator.bookMyShow.model.Status;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-
-import java.time.OffsetDateTime;
 import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,17 +29,25 @@ public class Booking {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @Column(nullable = false)
-    private Integer showId;
+    @ManyToOne
+    @JsonBackReference(value="show")
+    @JoinColumn(name = "show_id")
+    private Show show;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @ManyToOne
+    @JsonBackReference(value="user")
+    @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToMany(
+            mappedBy = "booking",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @JsonManagedReference
+    private Set<Payment> bookingPayments;
 
     @OneToMany(mappedBy = "booking")
     private Set<ShowSeat> bookingShowSeats;
-
-    @OneToMany(mappedBy = "booking")
-    private Set<Payment> bookingPayments;
 
 }

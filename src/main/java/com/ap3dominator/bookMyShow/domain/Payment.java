@@ -1,6 +1,7 @@
 package com.ap3dominator.bookMyShow.domain;
 
 import com.ap3dominator.bookMyShow.model.PaymentMethod;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.OffsetDateTime;
@@ -34,8 +35,10 @@ public class Payment {
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "booking_id", nullable = false)
+
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name = "booking_id")
     private Booking booking;
 
 }

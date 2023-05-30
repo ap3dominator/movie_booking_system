@@ -1,11 +1,8 @@
 package com.ap3dominator.bookMyShow.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+
 import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,7 +30,12 @@ public class User {
     @Column(length = 16)
     private String phone;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @JsonManagedReference(value="user")
     private Set<Booking> userBookings;
 
 }
