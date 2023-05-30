@@ -2,6 +2,7 @@ package com.ap3dominator.bookMyShow.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -31,7 +32,12 @@ public class Cinema {
     @JoinColumn(name = "city_id")
     private City city;
 
-    @OneToMany(mappedBy = "cinema")
+    @OneToMany(
+            mappedBy = "cinema",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @JsonManagedReference
     private Set<CinemaHall> cinemaHalls;
 
 }

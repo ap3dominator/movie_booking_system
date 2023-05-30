@@ -16,9 +16,7 @@ public class CinemaHallController {
     @PostMapping("/AddCinemaHall")
     public ResponseEntity<?> AddCinemaHall(@RequestBody CinemaHall cinemaHall)
     {
-        cinemaHallRepository.save(cinemaHall);
-        var isthere = cinemaHallRepository.findById(1);
-
-        return ResponseEntity.ok(isthere);
+        CinemaHall addedCinemaHall = cinemaHallRepository.save(cinemaHall);
+        return ResponseEntity.ok(addedCinemaHall);
     }
 }

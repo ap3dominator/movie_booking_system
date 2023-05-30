@@ -3,10 +3,14 @@ package com.ap3dominator.bookMyShow.controller;
 import com.ap3dominator.bookMyShow.domain.City;
 import com.ap3dominator.bookMyShow.repos.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
@@ -20,6 +24,14 @@ public class CityController {
     {
         City savedCity = cityRepository.save(city);
         return ResponseEntity.ok().body(savedCity);
+    }
+
+    @DeleteMapping("/DeleteCity/{id}")
+    public ResponseEntity<?> deleteCity(@PathVariable Integer id) {
+        cityRepository.deleteCity(id);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", true);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/GetAllCities")

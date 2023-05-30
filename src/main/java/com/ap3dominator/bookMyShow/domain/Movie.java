@@ -1,9 +1,11 @@
 package com.ap3dominator.bookMyShow.domain;
 
 import com.ap3dominator.bookMyShow.model.Genre;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
-import java.time.OffsetDateTime;
 import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,7 +43,12 @@ public class Movie {
     @Enumerated(EnumType.STRING)
     private Genre genre;
 
-    @OneToMany(mappedBy = "movie")
+    @OneToMany(
+            mappedBy = "movie",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @JsonManagedReference(value="movie")
     private Set<Show> movieShows;
 
 }

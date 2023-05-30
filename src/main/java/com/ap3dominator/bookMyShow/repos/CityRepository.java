@@ -16,5 +16,12 @@ public interface CityRepository extends JpaRepository<City, Integer> {
     @Query("SELECT city FROM City city")
     List<City> findAllCities();
 
+    default void deleteCity(Integer cityId) {
+        City cityToDelete = findById(cityId).
+                                orElseThrow(
+                                        () -> new IllegalArgumentException("City not found")
+                                );
+        delete(cityToDelete);
+    }
 
 }
