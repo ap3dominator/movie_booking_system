@@ -10,5 +10,5 @@ import java.util.List;
 
 public interface ShowRepository extends JpaRepository<Show, Integer> {
     @Query("SELECT show FROM Show show")
-    List<Movie> findAllShows();
+    List<Show> findAllShows();
 }
